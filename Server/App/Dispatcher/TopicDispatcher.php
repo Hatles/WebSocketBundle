@@ -145,6 +145,12 @@ class TopicDispatcher implements TopicDispatcherInterface
                     try {
                         $appTopic->secure($conn, $topic, $request, $payload, $exclude, $eligible, $provider);
                     } catch (FirewallRejectionException $e) {
+                        $this->logger->error(sprintf('You are not authorized to perform this action: %s', $e->getMessage()), [
+                            'topic' => $topic,
+                            'request' => $request,
+                            'event' => $calledMethod
+                        ]);
+
                         $conn->callError($topic->getId(), $topic, sprintf('You are not authorized to perform this action: %s', $e->getMessage()), [
                             'topic' => $topic,
                             'request' => $request,
