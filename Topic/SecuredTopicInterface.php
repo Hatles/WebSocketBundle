@@ -11,13 +11,13 @@ interface SecuredTopicInterface
 {
     /**
      * @param ConnectionInterface $conn
-     * @param Topic               $topic
-     * @param null|string         $payload
-     * @param string[]|null       $exclude
-     * @param string[]|null       $eligible
-     * @param string|null         $provider
-     *
-     * @throws \Gos\Bundle\WebSocketBundle\Server\Exception\FirewallRejectionException
+     * @param Topic $topic
+     * @param WampRequest $request
+     * @param null|string $payload
+     * @param string[]|null $exclude
+     * @param string[]|null $eligible
+     * @param string|null $provider
+     * @param string|null $calledMethod
      */
-    public function secure(ConnectionInterface $conn = null, Topic $topic, WampRequest $request, $payload = null, $exclude = null, $eligible = null, $provider = null);
+    public function secure(ConnectionInterface $conn = null, Topic $topic, WampRequest $request, $payload = null, $exclude = null, $eligible = null, $provider = null, $calledMethod = null);
 }

@@ -132,7 +132,7 @@ class TopicDispatcher implements TopicDispatcherInterface
      *
      * @return bool
      */
-    public function dispatch($calledMethod, ConnectionInterface $conn, Topic $topic, WampRequest $request, $payload = null, $exclude = null, $eligible = null, $provider = null)
+    public function dispatch($calledMethod, $conn, Topic $topic, WampRequest $request, $payload = null, $exclude = null, $eligible = null, $provider = null)
     {
         $dispatched = false;
 
@@ -143,7 +143,7 @@ class TopicDispatcher implements TopicDispatcherInterface
 
                 if ($appTopic instanceof SecuredTopicInterface) {
                     try {
-                        $appTopic->secure($conn, $topic, $request, $payload, $exclude, $eligible, $provider);
+                        $appTopic->secure($conn, $topic, $request, $payload, $exclude, $eligible, $provider, $calledMethod);
                     } catch (FirewallRejectionException $e) {
                         $this->logger->error(sprintf('You are not authorized to perform this action: %s', $e->getMessage()), [
                             'topic' => $topic,

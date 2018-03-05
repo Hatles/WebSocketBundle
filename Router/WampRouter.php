@@ -82,6 +82,7 @@ class WampRouter
                 'Unable to find route for %s',
                 $topic->getId()
             ));
+            $this->logger->error($e->getMessage());
 
             throw $e;
         }
